@@ -1,13 +1,31 @@
-// src/index.js
-const fastify = require('fastify')();
-const fastifyMultipart = require('fastify-multipart');
+// src/routes/uploadRoute.js
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
 
-const PORT = process.env.PORT || 3001;
+// Configuration of the multer storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
-fastify.register(fastifyMultipart);
+router.post("/upload", upload.single("file"), async (req, res) => {
+  try {
+    // Checking if a file was uploaded
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
 
+    // Checking if the uploaded file is a CSV
+    if (req.file.mimetype !== "text/csv") {
+      return res
+        .status(400)
+        .json({ error: "Invalid file format. Please upload a CSV file." });
+    }
 
-fastify.listen(PORT, (err) => {
-  if (err) throw err;
-  console.log(`Server running on port ${PORT}`);
+    res.status(200).json({ downloadLink: "successs" });
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
+module.exports = router;
