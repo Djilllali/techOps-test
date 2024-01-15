@@ -1,4 +1,4 @@
-// src/routes/uploadRoute.js
+const uploadController = require("../controllers/uploadController");
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
@@ -20,8 +20,8 @@ router.post("/upload", upload.single("file"), async (req, res) => {
         .status(400)
         .json({ error: "Invalid file format. Please upload a CSV file." });
     }
-
-    res.status(200).json({ downloadLink: "successs" });
+    const result = await uploadController.processFile(req.file);
+    res.status(200).json({ downloadLink: result });
   } catch (error) {
     console.error("Error uploading file:", error);
     res.status(500).json({ error: "Internal Server Error" });
