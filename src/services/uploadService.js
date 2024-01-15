@@ -1,5 +1,5 @@
-// src/services/uploadService.js
 const csvParser = require("csv-parser");
+const zippingService = require("./zippingService");
 
 const processFile = async (file) => {
   const maleData = [];
@@ -29,7 +29,12 @@ const processFile = async (file) => {
       });
   });
 
-  return femaleData;
+  const zipFilePath = await zippingService.zipFile(
+    file.originalname,
+    maleData,
+    femaleData
+  );
+  return zipFilePath;
 };
 
 module.exports = {
