@@ -1,11 +1,23 @@
 const pako = require("pako");
+const { createZipFile } = require("../utils/fileUtils");
 
 const zipFile = async (filename, maleData, femaleData) => {
-  // Compressing each gender's data using pako
-  const compressedMaleData = pako.deflate(JSON.stringify(maleData));
-  const compressedFemaleData = pako.deflate(JSON.stringify(femaleData));
+  // Compressing data with pako
+  const compressedMaleData = pako.deflate(JSON.stringify(maleData), {
+    to: "string",
+  });
+  const compressedFemaleData = pako.deflate(JSON.stringify(femaleData), {
+    to: "string",
+  });
 
-  return compressedFemaleData;
+  // Create a zip file
+  const zipFilePath = await createZipFile(
+    filename,
+    compressedMaleData,
+    compressedFemaleData
+  );
+
+  return zipFilePath;
 };
 
 module.exports = {
