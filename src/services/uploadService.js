@@ -3,7 +3,7 @@ const csvParser = require("csv-parser");
 const zippingService = require("./zippingService");
 const fs = require("fs");
 
-const processFile = async (file) => {
+const parseFile = async (file) => {
   const maleData = [];
   const femaleData = [];
   let processedRows = 0;
@@ -59,5 +59,5 @@ async function convertArrayToCsvString(dataArray) {
 }
 
 module.exports = {
-  processFile,
+  parseFile,
 };

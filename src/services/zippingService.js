@@ -21,10 +21,11 @@ const createZipFile = async (filename, maleData, femaleData) => {
   // Add femaleData.csv to the ZIP
   archive.append(femaleBuffer, { name: "femaleData.csv" });
 
+  const path = zipFilePath.replace(".", "");
   // handling finalization
   return new Promise((resolve, reject) => {
     output.on("close", () => {
-      resolve(zipFilePath);
+      resolve(path);
     });
 
     archive.on("error", (err) => {
