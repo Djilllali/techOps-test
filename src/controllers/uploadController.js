@@ -1,8 +1,8 @@
 const uploadService = require("../services/uploadService");
 
-const processFile = async (file, io) => {
+const processFile = async (file) => {
   try {
-    const result = await uploadService.processFile(file, io);
+    const result = await uploadService.processFile(file);
     return result;
   } catch (error) {
     console.error("Error processing file:", error);

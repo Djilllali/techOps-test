@@ -1,14 +1,14 @@
+const csvWriter = require("csv-writer").createObjectCsvWriter;
 const csvParser = require("csv-parser");
 const zippingService = require("./zippingService");
+const fs = require("fs");
 
-const processFile = async (file, io) => {
+const processFile = async (file) => {
   const maleData = [];
   const femaleData = [];
-
+  let processedRows = 0;
   const fileBuffer = file.buffer;
-  io.emit("progress", "{ progress: upload-start }");
   await new Promise((resolve, reject) => {
-    // Creating a readable stream from the buffer
     const readableStream = require("stream").Readable.from(fileBuffer);
 
     readableStream
@@ -20,30 +20,43 @@ const processFile = async (file, io) => {
         } else if (gender === "female") {
           femaleData.push(row);
         }
-        // Emit progress event during CSV processing
+        processedRows++;
       })
       .on("end", () => {
-        io.emit("progress", "pushing data ends");
         resolve();
       })
       .on("error", (error) => {
+        console.log("error");
         reject(error);
       });
   });
-  // Emit event when processing ends
-  io.emit("progress", "{ progress: processing-end }");
-  // Emit event when zipping starts
-  io.emit("progress", "{ progress: zippingstart }");
-  const zipFilePath = await zippingService.zipFile(
+
+  const maleCsvString = await convertArrayToCsvString(maleData);
+  const femaleCsvString = await convertArrayToCsvString(femaleData);
+
+  const zipFilePath = await zippingService.createZipFile(
     file.originalname,
-    maleData,
-    femaleData
+    maleCsvString,
+    femaleCsvString
   );
-  // Emit event when zipping ends
-  io.emit("progress", "{ progress: zipping-end }");
-  io.emit("progress", "{ progress: complete }");
+
   return zipFilePath;
 };
+
+async function convertArrayToCsvString(dataArray) {
+  const csvWriterInstance = csvWriter({
+    path: "temp.csv", // Use a temporary file
+    header: Object.keys(dataArray[0]),
+  });
+
+  await csvWriterInstance.writeRecords(dataArray);
+  const csvString = fs.readFileSync("temp.csv", "utf-8");
+
+  // Removing the temporary file
+  fs.unlinkSync("temp.csv");
+
+  return csvString;
+}
 
 module.exports = {
   processFile,
