@@ -10,6 +10,13 @@ const PORT = process.env.PORT || 3001;
 // Enable CORS for Express routes
 app.use(cors());
 
+const uploadsPath = path.join(__dirname, "uploads");
+
+// Check if uploads directory exists and create it if not
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath);
+}
+
 // Route for file uploads
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
