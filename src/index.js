@@ -2,6 +2,8 @@ const express = require("express");
 const http = require("http");
 const uploadRoute = require("./routes/uploadRoute");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const server = http.createServer(app);
