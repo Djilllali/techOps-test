@@ -4,7 +4,7 @@ uploads/*
 
 # Ignore log files
 *.log
-*.log
+*.csv
 
 # Ignore .env files (containing sensitive information)
 .env
