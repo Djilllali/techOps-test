@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>backend 1.0.0 | Documentation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="assets/bass.css" rel="stylesheet" />
+    <link href="assets/style.css" rel="stylesheet" />
+    <link href="assets/github.css" rel="stylesheet" />
+    <link href="assets/split.css" rel="stylesheet" />
+  </head>
+  <body class="documentation m0">
+    <div class="flex">
+      <div id="split-left" class="overflow-auto fs0 height-viewport-100">
+        <div class="py1 px2">
+          <h3 class="mb0 no-anchor">backend</h3>
+          <div class="mb1"><code>1.0.0</code></div>
+          <input
+            placeholder="Filter"
+            id="filter-input"
+            class="col12 block input"
+            spellcheck="false"
+            autocapitalize="off"
+            autocorrect="off"
+            type="text"
+          />
+          <div id="toc">
+            <ul class="list-reset h5 py1-ul">
+              <li><a href="#uploadservice" class=""> uploadService </a></li>
+
+              <li><a href="#processfile" class=""> processFile </a></li>
+
+              <li>
+                <a href="#uploadcontroller" class=""> uploadController </a>
+              </li>
+
+              <li><a href="#csvservice" class=""> csvService </a></li>
+
+              <li><a href="#parsefile" class=""> parseFile </a></li>
+
+              <li>
+                <a href="#convertarraytocsvstring" class="">
+                  convertArrayToCsvString
+                </a>
+              </li>
+
+              <li><a href="#zippingservice" class=""> zippingService </a></li>
+
+              <li><a href="#createzipfile" class=""> createZipFile </a></li>
+            </ul>
+          </div>
+          <div class="mt1 h6 quiet">
+            <a href="https://documentation.js.org/reading-documentation.html"
+              >Need help reading this?</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="split-right" class="relative overflow-auto height-viewport-100">
+        <h3 class="fl m0" id="filecard">Documentation backend</h3>
+        <p>
+          Ceci constitue la partie backend du test technique, conçu pour évaluer
+          les compétences en développement d'interfaces React, en API Node.js,
+          et la capacité à gérer efficacement un fichier CSV. J'ai implémenté
+          cette solution en utilisant <strong>Express.js</strong> en conjonction
+          avec des outils tels que <strong>Multer</strong> pour la gestion des
+          fichiers, <strong>csv-parse</strong> pour l'analyse des fichiers CSV,
+          et <strong>Archiver</strong> pour la compression.
+        </p>
+
+        <p>Allons-y!</p>
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="uploadservice">uploadService</h3>
+          </div>
+
+          <p>Module de service pour l'envoi de fichiers.</p>
+
+          <div class="pre p1 fill-light mt0">uploadService</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="processfile">processFile</h3>
+          </div>
+
+          <p>
+            Cette fonction utilise le service d'upload pour analyser le fichier
+            spécifié.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            processFile(file:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >):
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">file</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >)</code
+                >
+                Objet représentant le fichier csv.
+              </div>
+            </div>
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            ></code
+          >: Renvoie le résultat du traitement du fichier.
+
+          <div class="py1 quiet mt1 prose-big">Throws</div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error"
+                >Error</a
+              >: Lance une erreur si le traitement du fichier échoue.
+            </li>
+          </ul>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="uploadcontroller">uploadController</h3>
+          </div>
+
+          <p>
+            Contrôleur de téléversement pour gérer les requêtes d'upload.
+            Configuration of the multer storage Checking if a file was uploaded
+          </p>
+
+          <div class="pre p1 fill-light mt0">uploadController</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="csvservice">csvService</h3>
+          </div>
+
+          <p>Module de service pour la manipulation de fichiers CSV.</p>
+
+          <div class="pre p1 fill-light mt0">csvService</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="parsefile">parseFile</h3>
+          </div>
+
+          <p>
+            Cette fonction prend un fichier CSV, le divise en données maleData
+            et femaleData, convertit ces données en chaînes CSV distinctes, crée
+            un fichier ZIP et renvoie le chemin du fichier ZIP créé.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            parseFile(file:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+              >Object</a
+            >):
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">file</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object"
+                    >Object</a
+                  >)</code
+                >
+                Objet représentant le fichier CSV.
+              </div>
+            </div>
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            ></code
+          >: Renvoie le chemin du fichier ZIP résultant.
+
+          <div class="py1 quiet mt1 prose-big">Throws</div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error"
+                >Error</a
+              >: Lance une erreur si l'analyse du fichier échoue.
+            </li>
+          </ul>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="convertarraytocsvstring">
+              convertArrayToCsvString
+            </h3>
+          </div>
+
+          <p>
+            Cette fonction prend un tableau de données et le convertit en un
+            CSV, en utilisant la bibliothèque csv-writer.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            convertArrayToCsvString(dataArray:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array"
+              >Array</a
+            >):
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">dataArray</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                    >Array</a
+                  >)</code
+                >
+                Tableau de données à convertir.
+              </div>
+            </div>
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            ></code
+          >: Renvoie le CSV résultant.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="zippingservice">zippingService</h3>
+          </div>
+
+          <p>Module de service pour la compression de données.</p>
+
+          <div class="pre p1 fill-light mt0">zippingService</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="createzipfile">createZipFile</h3>
+          </div>
+
+          <p>
+            Cette fonction crée un fichier ZIP à partir des données CSV
+            masculines et féminines, en utilisant la bibliothèque archiver, puis
+            renvoie le chemin du fichier ZIP créé.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            createZipFile(filename:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, maleData:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, femaleData:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >):
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">filename</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                Nom du fichier d'origine.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">maleData</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                Données masculines au format CSV.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">femaleData</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                Données féminines au format CSV.
+              </div>
+            </div>
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              >Promise</a
+            ></code
+          >: Renvoie le chemin du fichier ZIP créé.
+
+          <div class="py1 quiet mt1 prose-big">Throws</div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error"
+                >Error</a
+              >: Lance une erreur si la création du fichier ZIP échoue.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <script src="assets/anchor.js"></script>
+    <script src="assets/split.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

@@ -3,6 +3,12 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 
+/**
+ * Contrôleur de téléversement pour gérer les requêtes d'upload.
+ * Configuration of the multer storage
+ * Checking if a file was uploaded
+ * @module uploadController
+ */
 // Configuration of the multer storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

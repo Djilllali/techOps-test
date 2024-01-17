@@ -1,3 +1,7 @@
+/**
+ * Application serveur pour gérer les téléversements de fichiers.
+ * @module server
+ */
 const express = require("express");
 const http = require("http");
 const uploadRoute = require("./routes/uploadRoute");
