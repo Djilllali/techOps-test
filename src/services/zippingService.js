@@ -6,7 +6,7 @@ const createZipFile = async (filename, maleData, femaleData) => {
 
   const output = fs.createWriteStream(zipFilePath);
   const archive = archiver("zip", {
-    zlib: { level: 9 }, // Maximum compression
+    zlib: { level: 1 },
   });
 
   archive.pipe(output);

@@ -12,7 +12,8 @@ const PORT = process.env.PORT || 3001;
 // Enable CORS for Express routes
 app.use(cors());
 
-const uploadsPath = path.join(__dirname, "uploads");
+const parentFolderPath = path.join(__dirname, "..");
+const uploadsPath = path.join(parentFolderPath, "uploads");
 
 // Check if uploads directory exists and create it if not
 if (!fs.existsSync(uploadsPath)) {
